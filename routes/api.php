@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('register',array('as' => 'register','uses' => 'api\AuthController@register'));
+Route::post('login',array('as' => 'login','uses' => 'api\AuthController@login'));
+
+Route::post('course',array('as' => 'saveCourse','uses' => 'api\CourseController@saveCourse'));
+Route::get('course',array('as' => 'courseList','uses' => 'api\CourseController@list'));
+// Route::post('course',array('as' => 'user.order-list','uses' => 'api\CourseController@saveCourse'));
+// ->middleware('auth_user_api');
