@@ -22,5 +22,7 @@ Route::post('login',array('as' => 'login','uses' => 'api\AuthController@login'))
 
 Route::post('course',array('as' => 'saveCourse','uses' => 'api\CourseController@saveCourse'));
 Route::get('course',array('as' => 'courseList','uses' => 'api\CourseController@list'));
+Route::post('lesson',array('as' => 'saveCourse','uses' => 'api\CourseController@saveLesson'));
 // Route::post('course',array('as' => 'user.order-list','uses' => 'api\CourseController@saveCourse'));
 // ->middleware('auth_user_api');
+Route::post('question',array('as' => 'saveLesson','uses' => 'api\LessonController@saveQuestion'));

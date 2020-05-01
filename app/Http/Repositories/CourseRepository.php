@@ -10,9 +10,9 @@ use App\Models\Course;
 class CourseRepository extends Controller
 {
     public function save($data){
-      $user['title'] = $data['title'];
+      $course['title'] = $data['title'];
       try{
-        return Course::insertGetId($user);
+        return Course::insertGetId($course);
       }catch(\Exception $e){
         return 0;
       }
