@@ -17,7 +17,7 @@ class ApiAuthenticateUser
      */
     public function handle($request, Closure $next)
     {
-        $token = $request['Authorization'];
+        $token = isset($request->header()['authorization']) && is_array($request->header()['authorization']) ? $request->header()['authorization'][0] : '';
         $u_id = $this->checkToken($token);
         if($u_id!=false){
           $request->merge(['user_id' => $u_id]);

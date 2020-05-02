@@ -23,12 +23,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('register',array('as' => 'register','uses' => 'api\AuthController@register'));
 Route::post('login',array('as' => 'login','uses' => 'api\AuthController@login'));
 
-Route::post('course',array('as' => 'saveCourse','uses' => 'api\CourseController@saveCourse'));
-Route::get('course',array('as' => 'courseList','uses' => 'api\CourseController@list'));
-Route::post('lesson',array('as' => 'saveLesson','uses' => 'api\LessonController@saveLesson'));
-Route::get('lesson',array('as' => 'lessonList','uses' => 'api\LessonController@list'));
-Route::get('lesson-by-course/{id}',array('as' => 'getCourseLessons','uses' => 'api\LessonController@getCourseLessons'));
-Route::get('lesson-details/{id}',array('as' => 'getLessonDetails','uses' => 'api\LessonController@getLessonDetails'));
-// Route::post('course',array('as' => 'user.order-list','uses' => 'api\CourseController@saveCourse'));
-// ->middleware('auth_user_api');
-Route::post('question',array('as' => 'saveLesson','uses' => 'api\LessonController@saveQuestion'));
+Route::middleware(['auth_user_api'])->group(function () {
+  Route::post('course',array('as' => 'saveCourse','uses' => 'api\CourseController@saveCourse'))->middleware('auth_admin_api');
+  Route::get('course',array('as' => 'courseList','uses' => 'api\CourseController@list'));
+  Route::post('lesson',array('as' => 'saveLesson','uses' => 'api\LessonController@saveLesson'))->middleware('auth_admin_api');
+  Route::get('lesson',array('as' => 'lessonList','uses' => 'api\LessonController@list'));
+  Route::get('lesson-by-course/{id}',array('as' => 'getCourseLessons','uses' => 'api\LessonController@getCourseLessons'));
+  Route::get('lesson-details/{id}',array('as' => 'getLessonDetails','uses' => 'api\LessonController@getLessonDetails'))->middleware('auth_admin_api');
+
+  Route::get('lesson-details-exam/{id}',array('as' => 'getLessonDetailsForExam','uses' => 'api\LessonController@getLessonDetailsForExam'));
+
+  Route::post('question',array('as' => 'saveLesson','uses' => 'api\LessonController@saveQuestion'))->middleware('auth_admin_api');
+});
