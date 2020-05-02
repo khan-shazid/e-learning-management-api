@@ -19,6 +19,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        // \App\Http\Middleware\Cors::class,
     ];
 
     /**
@@ -54,6 +55,7 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth_user_api' => \App\Http\Middleware\ApiAuthenticateUser::class, //custom for user authentication
         'auth_admin_api' => \App\Http\Middleware\ApiAuthenticateAdmin::class, //custom for admin authentication
+        'cors' => \App\Http\Middleware\Cors::class, //custom for cors
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

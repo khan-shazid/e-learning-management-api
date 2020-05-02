@@ -22,8 +22,6 @@ class LessonRepository extends Controller
     }
 
     public function saveLessonQuestion($data){
-      // echo '<pre>';
-      // print_r($data);exit;
       $question['lesson_id'] = $data['lesson_id'];
       $question['text'] = $data['data']['question_text'];
       $qId = Question::insertGetId($question);
@@ -36,13 +34,23 @@ class LessonRepository extends Controller
         }
       }
       return $qId;
-      // $question['answer_ids'] = $data['data']['questionText'];
     }
 
     public function get($value,$key){
-      return Course::where($key,$value)->first();
+      return Lesson::where($key,$value)->first();
     }
     public function list(){
-      return Course::get();
+      return Lesson::get();
+    }
+
+    public function getCourseLessons($courseId){
+      return Lesson::where('course_id',$courseId)->get();
+    }
+    public function getCourseLessonsWithDetails($courseId){
+      return Lesson::where('course_id',$courseId)->with('questions')->get();
+    }
+
+    public function getLessonDetails($lessonId){
+      return Question::where('lesson_id',$lessonId)->with('options')->get();
     }
 }

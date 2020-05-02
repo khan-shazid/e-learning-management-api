@@ -28,4 +28,13 @@ class CourseController extends Controller
         ],400);
       }
     }
+
+    public function list(){
+      $list = $this->courseRepo->list();
+      return response()->json([
+        'success' => true,
+        'message' => "Successfully fetched",
+        'data' => $list
+      ],200);
+    }
 }

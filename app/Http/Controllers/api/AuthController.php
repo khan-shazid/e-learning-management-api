@@ -28,7 +28,8 @@ class AuthController extends Controller
           return response()->json([
             'success' => true,
             'message' => "Successfully Registered",
-            'data' => $token
+            'data' => $token,
+            'role' => 'user'
           ],200);
         }else{
           return response()->json([
@@ -52,7 +53,8 @@ class AuthController extends Controller
           return response()->json([
             'success' => true,
             'message' => "Successfully logged in.",
-            'data' => $token
+            'data' => $token,
+            'role' => $user['role']
           ],200);
         }else{
           return response()->json([

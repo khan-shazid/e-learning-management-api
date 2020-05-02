@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +12,10 @@ use Illuminate\Http\Request;
 |
 */
 
+header('Access-Control-Allow-Origin:  *');
+header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
+header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -22,7 +25,10 @@ Route::post('login',array('as' => 'login','uses' => 'api\AuthController@login'))
 
 Route::post('course',array('as' => 'saveCourse','uses' => 'api\CourseController@saveCourse'));
 Route::get('course',array('as' => 'courseList','uses' => 'api\CourseController@list'));
-Route::post('lesson',array('as' => 'saveCourse','uses' => 'api\CourseController@saveLesson'));
+Route::post('lesson',array('as' => 'saveLesson','uses' => 'api\LessonController@saveLesson'));
+Route::get('lesson',array('as' => 'lessonList','uses' => 'api\LessonController@list'));
+Route::get('lesson-by-course/{id}',array('as' => 'getCourseLessons','uses' => 'api\LessonController@getCourseLessons'));
+Route::get('lesson-details/{id}',array('as' => 'getLessonDetails','uses' => 'api\LessonController@getLessonDetails'));
 // Route::post('course',array('as' => 'user.order-list','uses' => 'api\CourseController@saveCourse'));
 // ->middleware('auth_user_api');
 Route::post('question',array('as' => 'saveLesson','uses' => 'api\LessonController@saveQuestion'));

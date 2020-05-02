@@ -46,4 +46,39 @@ class LessonController extends Controller
         ],400);
       }
     }
+
+    public function list(){
+      $list = $this->lessonRepo->list();
+      return response()->json([
+        'success' => true,
+        'message' => "Successfully fetched",
+        'data' => $list
+      ],200);
+    }
+
+    public function getCourseLessons($id){
+      $list = $this->lessonRepo->getCourseLessons($id);
+      return response()->json([
+        'success' => true,
+        'message' => "Successfully fetched",
+        'data' => $list
+      ],200);
+    }
+    public function getCourseLessonsWithDetails($id){
+      $list = $this->lessonRepo->getCourseLessonsWithDetails($id);
+      return response()->json([
+        'success' => true,
+        'message' => "Successfully fetched",
+        'data' => $list
+      ],200);
+    }
+
+    public function getLessonDetails($id){
+      $list = $this->lessonRepo->getLessonDetails($id);
+      return response()->json([
+        'success' => true,
+        'message' => "Successfully fetched",
+        'data' => $list
+      ],200);
+    }
 }
