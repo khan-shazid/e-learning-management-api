@@ -40,4 +40,8 @@ class ExamRepository extends Controller
       Exam::where('id', $examId)->update(['mark_obtained' => $total]);
       return $total;
     }
+
+    public function getPreviousExams($userId){
+      return Exam::where('user_id',$userId)->with('course','lesson')->get();
+    }
 }

@@ -35,4 +35,5 @@ Route::middleware(['auth_user_api'])->group(function () {
 
   Route::post('question',array('as' => 'saveLesson','uses' => 'api\LessonController@saveQuestion'))->middleware('auth_admin_api');
   Route::post('exam',array('as' => 'exam','uses' => 'api\LessonController@exam'));
+  Route::get('previous-exams',array('as' => 'previousExamList','uses' => 'api\LessonController@previousExamList'));
 });

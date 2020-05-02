@@ -111,4 +111,14 @@ class LessonController extends Controller
         ],400);
       }
     }
+
+    public function previousExamList(Request $request){
+      // return $request['user_id'];
+      $list = $this->examRepo->getPreviousExams($request['user_id']);
+      return response()->json([
+        'success' => true,
+        'message' => "Exam Done! Your marks are given below.",
+        'data' => $list
+      ],200);
+    }
 }
