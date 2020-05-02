@@ -34,4 +34,5 @@ Route::middleware(['auth_user_api'])->group(function () {
   Route::get('lesson-details-exam/{id}',array('as' => 'getLessonDetailsForExam','uses' => 'api\LessonController@getLessonDetailsForExam'));
 
   Route::post('question',array('as' => 'saveLesson','uses' => 'api\LessonController@saveQuestion'))->middleware('auth_admin_api');
+  Route::post('exam',array('as' => 'exam','uses' => 'api\LessonController@exam'));
 });

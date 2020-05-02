@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Http\Repositories\LessonRepository;
+use App\Http\Repositories\ExamRepository;
 
 class LessonController extends Controller
 {
     public $lessonRepo;
+    public $examRepo;
     function __construct(){
       $this->lessonRepo = new LessonRepository();
+      $this->examRepo = new ExamRepository();
     }
 
     public function saveLesson(Request $request){
@@ -80,5 +83,32 @@ class LessonController extends Controller
         'message' => "Successfully fetched",
         'data' => $list
       ],200);
+    }
+
+    public function getLessonDetailsForExam($id){
+      $list = $this->lessonRepo->getLessonDetailsForExam($id);
+      return response()->json([
+        'success' => true,
+        'message' => "Successfully fetched",
+        'data' => $list
+      ],200);
+    }
+
+    public function exam(Request $request){
+      $data = $request->all();
+      $examId = $this->examRepo->saveExamDetails($data);
+      if($examId){
+        $number = $this->examRepo->calculateTotalNumber($data,$examId);
+        return response()->json([
+          'success' => true,
+          'message' => "Exam Done! Your marks are given below.",
+          'data' => $number
+        ],200);
+      }else{
+        return response()->json([
+          'success' => false,
+          'message' => "Exam save unsuccessful"
+        ],400);
+      }
     }
 }

@@ -53,4 +53,8 @@ class LessonRepository extends Controller
     public function getLessonDetails($lessonId){
       return Question::where('lesson_id',$lessonId)->with('options')->get();
     }
+
+    public function getLessonDetailsForExam($lessonId){
+      return Question::where('lesson_id',$lessonId)->with('options')->select('id','lesson_id','text')->get();
+    }
 }
